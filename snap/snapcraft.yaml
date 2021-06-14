@@ -1,0 +1,21 @@
+name: mongo # you probably want to 'snapcraft register <name>'
+base: core20 # the base snap is the execution environment for this snap
+version: '4.4.6:0.1' # just for humans, typically '1.2+git' or '1.3.2'
+summary: MongoDB CE # 79 char long summary
+description: |
+  MongoDB Community Edition
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+apps:
+  mongo:
+    command: bin/mongo
+
+parts:
+  mongo:
+    source: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-4.4.6.tgz
+    # See 'snapcraft plugins'
+    plugin: dump
+    stage-packages:
+      - libcurl4
