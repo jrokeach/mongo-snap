@@ -11,11 +11,19 @@ confinement: devmode # use 'strict' once you have the right plugs and slots
 apps:
   mongo:
     command: bin/mongo
+  dump:
+    command: bin/mongodump
+  restore:
+    command: bin/mongorestore
 
 parts:
   mongo:
     source: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-4.4.6.tgz
-    # See 'snapcraft plugins'
     plugin: dump
     stage-packages:
       - libcurl4
+  mongo-database-tools:
+    source: https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu1804-x86_64-100.3.1.tgz
+    plugin: dump
+    organize:
+      THIRD-PARTY-NOTICES: TOOLS-THIRD-PARTY-NOTICES
